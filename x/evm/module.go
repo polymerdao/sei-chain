@@ -1,8 +1,10 @@
 package evm
 
 import (
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"log"
 
 	// this line is used by starport scaffolding # 1
 
@@ -160,7 +162,28 @@ func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONCodec) json.Raw
 func (AppModule) ConsensusVersion() uint64 { return 3 }
 
 // BeginBlock executes all ABCI BeginBlock logic respective to the capability module.
-func (am AppModule) BeginBlock(sdk.Context, abci.RequestBeginBlock) {
+func (am AppModule) BeginBlock(ctx sdk.Context, _ abci.RequestBeginBlock) {
+	hexStr := "1ae3b5d0607cb815cb5277671d77f983a1c74f36b2e96d87de1d9e0cc1e0e0a9"
+	// Convert hex string to bytes
+	bz, err := hex.DecodeString(hexStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var txHash common.Hash
+	copy(txHash[:], bz[:])
+	log.Println("hello")
+	receipt, _ := am.keeper.GetReceipt(ctx, txHash)
+	if receipt == nil {
+		err = am.keeper.SetReceipt(ctx, txHash, &types.Receipt{
+			TxType:            1,
+			CumulativeGasUsed: 1,
+			BlockNumber:       1337,
+		})
+	}
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // EndBlock executes all ABCI EndBlock logic respective to the capability module. It

@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"errors"
+	"log"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
@@ -21,6 +22,7 @@ func (k *Keeper) GetReceipt(ctx sdk.Context, txHash common.Hash) (*types.Receipt
 	if err := r.Unmarshal(bz); err != nil {
 		return nil, err
 	}
+	log.Println("[YEET] GET KEY ->", txHash)
 	return &r, nil
 }
 
@@ -31,5 +33,6 @@ func (k *Keeper) SetReceipt(ctx sdk.Context, txHash common.Hash, receipt *types.
 		return err
 	}
 	store.Set(types.ReceiptKey(txHash), bz)
+	log.Println("[YEET] SET KEY ->", txHash)
 	return nil
 }

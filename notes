@@ -1,0 +1,17 @@
+0b
+1ae3b7d0607cb815cb5277671d77f983a1c74f34b2e76d87de1d9e0cc1e0e9
+
+1ae3b5d0607cb815cb5277671d77f983a1c74f36b2e96d87de1d9e0cc1e0e0a9
+
+0b1ae3b5d0607cb815cb5277671d77f983a1c74f36b2e96d87de1d9e0cc1e0e0a9
+
+
+CxrjtdBgfLgVy1J3Zx13+YOhx082sulth94dngzB4OCp
+
+Cxrjt9BgfLgVy1J3Zx13+YOhx080sudth94dngzB4Ok=
+
+curl 'https://rpc-arctic-1.sei-apis.com/abci_query?path=/store/evm/key&height=8093754&prove=true&data=CxrjtdBgfLgVy1J3Zx13%2BYOhx082sulth94dngzB4OCp' | jq "."
+
+curl 'https://rpc-arctic-1.sei-apis.com/abci_query?path=/store/evm/key&height=8093754&prove=false&data=CxrjtdBgfLgVy1J3Zx13%2BYOhx082sulth94dngzB4OCp' | jq "."
+
+curl -H "Content-Type: application/json" --data-binary @request.json https://evm-rpc-arctic-1.sei-apis.com/  | jq "."
